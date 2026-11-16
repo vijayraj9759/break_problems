@@ -2,16 +2,6 @@ function isEqual(value1, value2) {
     if (value1 === value2) return true;
 
     if (typeof value1 === "object" && typeof value2 === "object") {
-        if (Array.isArray(value1) && Array.isArray(value2)) {
-            if (value1.length != value2.length) return false;
-
-            for (let i = 0; i < value1.length; i++) {
-                if (!isEqual(value1[i], value2[i])) return false;
-            }
-
-            return true;
-        }
-
         if (Object.keys(value1).length != Object.keys(value2).length)
             return false;
 
