@@ -209,6 +209,12 @@ const testData = [
         b: null,
         expectedResult: true,
     },
+    {
+        title: "NaN values",
+        a: NaN,
+        b: NaN,
+        expectedResult: false,
+    },
 ];
 
 testEachCase(testData);
