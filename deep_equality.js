@@ -1,19 +1,25 @@
 function isEqual(value1, value2) {
-    if (typeof value1 != typeof value2) return false;
     if (value1 === value2) return true;
 
-    if (Array.isArray(value1) && Array.isArray(value2)) {
-        if (value1.length != value2.length) return false;
+    if (typeof value1 === "object" && typeof value2 === "object") {
+        if (Array.isArray(value1) && Array.isArray(value2)) {
+            if (value1.length != value2.length) return false;
 
-        for (let i = 0; i < value1.length; i++) {
-            if (!isEqual(value1[i], value2[i])) return false;
+            for (let i = 0; i < value1.length; i++) {
+                if (!isEqual(value1[i], value2[i])) return false;
+            }
+
+            return true;
+        }
+
+        if (Object.keys(value1).length != Object.keys(value2).length)
+            return false;
+
+        for (const key in value1) {
+            if (!isEqual(value1[key], value2[key])) return false;
         }
 
         return true;
-    }
-
-    for (const key in value1) {
-        if (!isEqual(value1[key], value2[key])) return false;
     }
 
     return false;
@@ -149,6 +155,42 @@ const testData = [
         a: [, [, [, [,]]]],
         b: [, [, [, [,]]]],
         expectedResult: true,
+    },
+    {
+        title: "Equal objects",
+        a: { name: "Vijay", roll: 23 },
+        b: { name: "Vijay", roll: 23 },
+        expectedResult: true,
+    },
+    {
+        title: "different objects value",
+        a: { name: "Vijay", roll: 23 },
+        b: { name: "Sampath", roll: 23 },
+        expectedResult: false,
+    },
+    {
+        title: "different no of keys of Objects",
+        a: { name: "Vijay", roll: 23, id: 1212 },
+        b: { name: "Sampath", roll: 23 },
+        expectedResult: false,
+    },
+    {
+        title: "different  order of keys of Objects",
+        a: { roll: 23, name: "Vijay" },
+        b: { name: "Vijay", roll: 23 },
+        expectedResult: true,
+    },
+    {
+        title: "values as equal arrays of Objects",
+        a: { roll: [23, 35, 3], name: "Vijay" },
+        b: { name: "Vijay", roll: [23, 35, 3] },
+        expectedResult: true,
+    },
+    {
+        title: "values as unequal arrays of Objects",
+        a: { roll: [23, 35, 3], name: "Vijay" },
+        b: { name: "Vijay", roll: [23, 353] },
+        expectedResult: false,
     },
 ];
 
