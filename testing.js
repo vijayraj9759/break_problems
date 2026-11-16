@@ -198,7 +198,13 @@ const testData = [
         expectedResult: false,
     },
     {
-        title: "Null value",
+        title: "Null with object value",
+        a: null,
+        b: [23, 24, 32],
+        expectedResult: false,
+    },
+    {
+        title: "Null values",
         a: null,
         b: null,
         expectedResult: true,
