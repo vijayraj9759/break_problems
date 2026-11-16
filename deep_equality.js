@@ -6,6 +6,7 @@ function isEqual(value1, value2) {
     if (Object.keys(value1).length !== Object.keys(value2).length) return false;
 
     for (const key in value1) {
+        if (!(key in value2)) return false;
         if (!isEqual(value1[key], value2[key])) return false;
     }
 

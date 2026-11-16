@@ -30,6 +30,18 @@ const testData = [
         expectedResult: false,
     },
     {
+        title: "undefined values",
+        a: { a: undefined },
+        b: { b: 1 },
+        expectedResult: false,
+    },
+    {
+        title: "undefined values",
+        a: { b: 1 },
+        b: { a: undefined },
+        expectedResult: false,
+    },
+    {
         title: "equal Array Values",
         a: [23, 34, 34, 234, 2],
         b: [23, 34, 34, 234, 2],
@@ -184,6 +196,12 @@ const testData = [
         a: [1, 2, 3],
         b: { 0: 1, 1: 2, 2: 3 },
         expectedResult: false,
+    },
+    {
+        title: "Null value",
+        a: null,
+        b: null,
+        expectedResult: true,
     },
 ];
 
