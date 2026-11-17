@@ -30,13 +30,13 @@ const testData = [
         expectedResult: false,
     },
     {
-        title: "undefined values",
+        title: "undefined as the value of key ",
         a: { a: undefined },
         b: { b: 1 },
         expectedResult: false,
     },
     {
-        title: "undefined values",
+        title: "undefined as the value of key",
         a: { b: 1 },
         b: { a: undefined },
         expectedResult: false,

@@ -1,18 +1,57 @@
-function isEqual(value1, value2) {
-    if (value1 === null || value2 === null)
-        return value1 === null && value2 === null;
+function type(a) {
+    if (Array.isArray(a)) return "array";
+    if (a === null) return "null";
+    if (Number.isNaN(a)) return "NaN";
+    return typeof a;
+}
 
-    if (value1 === value2) return true;
-    if (typeof value1 !== "object" && value1 !== value2) return false;
+function areSameType(a, b) {
+    return type(a) === type(b);
+}
 
-    if (Object.keys(value1).length !== Object.keys(value2).length) return false;
+function valueChecks(a, b) {
+    return a === b;
+}
 
-    for (const key in value1) {
-        if (!(key in value2) || !isEqual(value1[key], value2[key]))
-            return false;
+function areArraysEquals(a, b) {
+    if (a.length !== b.length) return false;
+
+    for (const index in a) {
+        if (!isEqual(a[index], b[index])) return false;
     }
 
-    return Array.isArray(value1) === Array.isArray(value2);
+    return true;
+}
+
+function areObjectsEquals(a, b) {
+    if (Object.keys(a).length !== Object.keys(b).length) return false;
+
+    for (const key in a) {
+        if (!(key in b)) return false;
+
+        if (!isEqual(a[key], b[key])) return false;
+    }
+
+    return true;
+}
+
+function isEqual(a, b) {
+    if (!areSameType(a, b)) return false;
+
+    switch (type(a)) {
+        case "number":
+            return valueChecks(a, b);
+        case "string":
+            return valueChecks(a, b);
+        case "null":
+            return valueChecks(a, b);
+        case "NaN":
+            return valueChecks(a, b);
+        case "array":
+            return areArraysEquals(a, b);
+        case "object":
+            return areObjectsEquals(a, b);
+    }
 }
 
 module.exports = {
