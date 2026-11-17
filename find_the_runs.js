@@ -1,38 +1,88 @@
 const { isEqual } = require("./deep_equality.js");
 
-function isInRun(direction, currElement, prevElement) {
-    if (direction === 1) return currElement >= prevElement;
-    return currElement < prevElement;
-}
-
 function findRuns(sequence) {
+    if (sequence.length === 0) return [];
+
     const runs = [];
-
-    if (sequence.length === 0) return runs;
-
-    let run = [sequence[0]];
-    let d = 0;
+    let prevOrder = 0;
+    let currRun = [sequence[0]];
 
     for (let i = 1; i < sequence.length; i++) {
-        const currElement = sequence[i];
-        const prevElement = run.at(-1);
+        const currOrder = Math.sign(sequence[i] - sequence[i - 1]);
 
-        if (d === 0) {
-            d = currElement >= prevElement ? 1 : -1;
-        }
+        if (prevOrder === 0) prevOrder = currOrder;
 
-        if (isInRun(d, currElement, prevElement)) {
-            run.push(currElement);
+        if (currOrder === 0 || currOrder === prevOrder) {
+            currRun.push(sequence[i]);
         } else {
-            runs.push(run);
-            run = [currElement];
-            d = 0;
+            runs.push(currRun);
+            currRun = [sequence[i]];
+            prevOrder = 0;
         }
     }
-    runs.push(run);
-
+    runs.push(currRun);
     return runs;
 }
+
+// function findRuns(sequence) {
+//     if (sequence.length === 0) return [];
+
+//     const runs = [];
+//     let isAscending = false;
+//     let isDesceding = false;
+//     let run = [sequence[0]];
+
+//     for (let i = 1; i < sequence.length; i++) {
+//         const currElement = sequence[i];
+//         const prevElement = run.at(-1);
+
+//         if (!isAscending && !isDesceding) {
+//             run.push(currElement);
+//             if (currElement > prevElement) isAscending = true;
+//             if (currElement < prevElement) isDesceding = true;
+//         } else {
+//             if (isInRun(isAscending, currElement, prevElement)) {
+//                 run.push(currElement);
+//             } else {
+//                 runs.push(run);
+//                 run = [currElement];
+//                 isAscending = false;
+//                 isDesceding = false;
+//             }
+//         }
+//     }
+//     runs.push(run);
+
+//     return runs;
+// }
+
+// function findRuns(sequence) {
+//     if (sequence.length === 0) return [];
+
+//     const runs = [];
+//     let run = [sequence[0]];
+//     let d = 0;
+
+//     for (let i = 1; i < sequence.length; i++) {
+//         const currElement = sequence[i];
+//         const prevElement = run.at(-1);
+
+//         if (d === 0) {
+//             d = currElement >= prevElement ? 1 : -1;
+//         }
+
+//         if (isInRun(d, currElement, prevElement)) {
+//             run.push(currElement);
+//         } else {
+//             runs.push(run);
+//             run = [currElement];
+//             d = 0;
+//         }
+//     }
+//     runs.push(run);
+
+//     return runs;
+// }
 
 function printMessage(actualResult, expectedResult, title) {
     const sign = isEqual(actualResult, expectedResult) ? "✅" : "❌";
@@ -61,8 +111,13 @@ const testCases = [
     },
     {
         data: [2, 2, 2, 2, 2, 2, 3],
-        title: "Same elements",
+        title: "Same elements in increasing order",
         expectedResult: [[2, 2, 2, 2, 2, 2, 3]],
+    },
+    {
+        data: [4, 3, 2, 2, 2, 2, 2, 2],
+        title: "Same elements in decreasing order",
+        expectedResult: [[4, 3, 2, 2, 2, 2, 2, 2]],
     },
     {
         data: [2],
