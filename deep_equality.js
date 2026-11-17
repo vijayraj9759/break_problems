@@ -39,6 +39,8 @@ function isEqual(a, b) {
     if (!areSameType(a, b)) return false;
 
     switch (type(a)) {
+        case "boolean":
+            return valueChecks(a, b);
         case "number":
             return valueChecks(a, b);
         case "string":
@@ -46,6 +48,8 @@ function isEqual(a, b) {
         case "null":
             return valueChecks(a, b);
         case "NaN":
+            return valueChecks(a, b);
+        case "undefined":
             return valueChecks(a, b);
         case "array":
             return areArraysEquals(a, b);
