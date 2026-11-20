@@ -1,4 +1,4 @@
-const { isEqual } = require("./deep_equality.js");
+const { isEqual } = require("./main.js");
 
 const test = function (message, expectedResult, a, b) {
     const actualResult = isEqual(a, b);
