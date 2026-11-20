@@ -1,33 +1,33 @@
 const { isEqual } = require("./deep_equality.js");
 
-function test(message, expectedResult, a, b) {
+const test = function (message, expectedResult, a, b) {
     const actualResult = isEqual(a, b);
     const sign = actualResult === expectedResult ? "✅" : "❌";
 
     console.log(`${sign} | ${message}`);
-}
+};
 
-function booleanChecks() {
+const booleanChecks = function () {
     test("Two same boolean should be equal", true, true, true);
     test("Two same boolean should be equal", true, false, false);
     test("a boolean and a number should be unequal", false, true, 1);
     test("a boolean and a string should be unequal", false, true, "1");
     test("different boolean values should be unequal", false, true, false);
-}
+};
 
-function numberChecks() {
+const numberChecks = function () {
     test("Two same numbers should be equal", true, 23, 23);
     test("Two different numbers should be unequal", false, 123, 23);
     test("a number and a string should be unequal", false, 123, "vijay");
-}
+};
 
-function stringChecks() {
+const stringChecks = function () {
     test("Two same strings should be equal", true, "23", "23");
     test("Two empty strings should be equal", true, "", "");
     test("different strings should be unequal", false, "vijay", "step");
-}
+};
 
-function arrayChecks() {
+const arrayChecks = function () {
     test("Two empty arrays should be equal", true, [], []);
     test("same 1-D arrays should be equal", true, [1, 2, 3, 4], [1, 2, 3, 4]);
     test(
@@ -55,9 +55,9 @@ function arrayChecks() {
         [1, 2, 3],
         { a: 1 },
     );
-}
+};
 
-function objectsChecks() {
+const objectsChecks = function () {
     test("empty objects should be equal", true, {}, {});
     test("same objects should be equal", true, { a: 1 }, { a: 1 });
     test(
@@ -96,9 +96,9 @@ function objectsChecks() {
         { a: 1, b: 2 },
         { b: 2, a: 1 },
     );
-}
+};
 
-function undefinedChecks() {
+const undefinedChecks = function () {
     test("Both undefined values should be equal", true, undefined, undefined);
     test(
         "undefined and a array should be unequal",
@@ -112,17 +112,17 @@ function undefinedChecks() {
     });
     test("undefined and a Null should be unequal", false, undefined, null);
     test("undefined and a NaN should be unequal", false, undefined, NaN);
-}
+};
 
-function nanChecks() {
+const nanChecks = function () {
     test("Both NaN values should be unequal", false, NaN, NaN);
-}
+};
 
-function nullChecks() {
+const nullChecks = function () {
     test("Both null values should be equal", true, null, null);
-}
+};
 
-function main() {
+const main = function () {
     booleanChecks();
     numberChecks();
     stringChecks();
@@ -131,6 +131,6 @@ function main() {
     undefinedChecks();
     nanChecks();
     nullChecks();
-}
+};
 
 main();

@@ -1,6 +1,6 @@
 const { isEqual } = require("./deep_equality.js");
 
-function isItBelongs(run, number) {
+const isItBelongs = function (run, number) {
     if (run.length < 2) return true;
 
     const d1 = Math.sign(number - run.at(-1));
@@ -9,9 +9,9 @@ function isItBelongs(run, number) {
     if (d1 + d2 === 1) return true;
 
     return d1 === d2;
-}
+};
 
-function findRuns(sequence) {
+const findRuns = function (sequence) {
     const runs = [[]];
 
     for (const number of sequence) {
@@ -22,21 +22,21 @@ function findRuns(sequence) {
     }
 
     return runs;
-}
+};
 
-function printMessage(actualResult, expectedResult, title) {
+const printMessage = function (actualResult, expectedResult, title) {
     const sign = isEqual(actualResult, expectedResult) ? "✅" : "❌";
     console.log(`${sign} : ${title}`);
-}
+};
 
-function testEachCase(testCases) {
+const testEachCase = function (testCases) {
     for (const testCase of testCases) {
         const { title, data, expectedResult } = testCase;
         const acutalResult = findRuns(data);
 
         printMessage(acutalResult, expectedResult, title);
     }
-}
+};
 
 const testCases = [
     {

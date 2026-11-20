@@ -1,19 +1,19 @@
-function type(a) {
+const type = function (a) {
     if (Array.isArray(a)) return "array";
     if (a === null) return "null";
     if (Number.isNaN(a)) return "NaN";
     return typeof a;
-}
+};
 
-function areSameType(a, b) {
+const areSameType = function (a, b) {
     return type(a) === type(b);
-}
+};
 
-function valueChecks(a, b) {
+const valueChecks = function (a, b) {
     return a === b;
-}
+};
 
-function areArraysEquals(a, b) {
+const areArraysEquals = function (a, b) {
     if (a.length !== b.length) return false;
 
     for (const index in a) {
@@ -21,9 +21,9 @@ function areArraysEquals(a, b) {
     }
 
     return true;
-}
+};
 
-function areObjectsEquals(a, b) {
+const areObjectsEquals = function (a, b) {
     if (Object.keys(a).length !== Object.keys(b).length) return false;
 
     for (const key in a) {
@@ -33,9 +33,9 @@ function areObjectsEquals(a, b) {
     }
 
     return true;
-}
+};
 
-function isEqual(a, b) {
+const isEqual = function (a, b) {
     if (!areSameType(a, b)) return false;
 
     switch (type(a)) {
@@ -56,7 +56,7 @@ function isEqual(a, b) {
         case "object":
             return areObjectsEquals(a, b);
     }
-}
+};
 
 module.exports = {
     isEqual,
