@@ -1,16 +1,29 @@
 function maximumSubarray(array) {
-    let = maxSum = -Infinity;
-    let = currSum = 0;
+    if (array.length === 0) return [];
 
-    for (const number of array) {
-        currSum += number;
+    let maxSum = -Infinity;
+    let currSum = 0;
 
-        maxSum = currSum > maxSum ? currSum : maxSum;
+    const maxSubarrayIndex = [];
+    let subarraySt = 0;
 
-        currSum = currSum < 0 ? 0 : currSum;
+    for (let index = 0; index < array.length; index++) {
+        currSum += array[index];
+
+        if (currSum > maxSum) {
+            maxSum = currSum;
+            maxSubarrayIndex[0] = subarraySt;
+            maxSubarrayIndex[1] = index;
+        }
+
+        if (currSum < 0) {
+            currSum = 0;
+            subarraySt = index + 1;
+        }
     }
 
-    return maxSum;
+    const [st, end] = maxSubarrayIndex;
+    return array.slice(st, end + 1);
 }
 
 module.exports = {
