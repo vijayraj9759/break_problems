@@ -50,3 +50,6 @@ const connections = [
 ];
 
 console.log(isPathExits(connections, "Mumbai", "Guwahati"));
+console.log(isPathExits(connections, "Mumbai", "New Delhi"));
+console.log(isPathExits(connections, "Mumbai", "Guwahati"));
+console.log(isPathExits(connections, "Mumbai", "Guwahati"));
