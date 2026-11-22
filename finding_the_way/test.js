@@ -1,5 +1,5 @@
 const { isEqual } = require("../deep_equality/function.js");
-const { findPath } = require("./function.js");
+const { findPath, transformData } = require("./function.js");
 
 const connections = [
     {
@@ -34,7 +34,7 @@ const connections = [
 // console.log(isPathExits(connections, "Bangalore", "Guwahati"));
 
 const test = function (message, expectedResult, connections, src, dest) {
-    const actualResult = findPath(connections, src, dest);
+    const actualResult = findPath(transformData(connections), src, dest);
     console.log(actualResult);
     const sign = isEqual(expectedResult, actualResult) ? "✅" : "❌";
 
@@ -55,6 +55,20 @@ const main = function () {
         connections,
         "Mumbai",
         "Mumbai",
+    );
+    test(
+        "Two cities that has no path should return a empty sequence",
+        [],
+        connections,
+        "Shillong",
+        "Kolkata",
+    );
+    test(
+        "There should be no path for a city that is not mentioned in the connections",
+        [],
+        connections,
+        "New Delhi",
+        "UP",
     );
     // test(
     //     "No edge detects in a bitmap which has only one row of same pixels",
