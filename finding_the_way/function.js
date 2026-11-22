@@ -1,11 +1,3 @@
-const findCitiesToExplore = function (connections, city) {
-    for (const connection of connections) {
-        if (connection.city === city) return connection.connections;
-    }
-
-    return [];
-};
-
 const findPath = function (connections, src, dest, visited = [], path = []) {
     if (src === dest) return path;
 
@@ -32,6 +24,24 @@ const findPath = function (connections, src, dest, visited = [], path = []) {
     return path;
 };
 
+const transformData = function (connections) {
+    const transformedConnections = {};
+
+    for (const connection of connections) {
+        transformedConnections[connection.city] = connection.connections;
+    }
+
+    return transformedConnections;
+};
+
+// const findCitiesToExplore = function (connections, city) {
+//     for (const connection of connections) {
+//         if (connection.city === city) return connection.connections;
+//     }
+
+//     return [];
+// };
+
 // const isPathExits = function (connections, src, dest, visited = []) {
 //     if (src === dest) return true;
 
@@ -50,16 +60,6 @@ const findPath = function (connections, src, dest, visited = [], path = []) {
 
 //     return false;
 // };
-
-const transformData = function (connections) {
-    const transformedConnections = {};
-
-    for (const connection of connections) {
-        transformedConnections[connection.city] = connection.connections;
-    }
-
-    return transformedConnections;
-};
 
 module.exports = {
     findPath,
