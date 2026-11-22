@@ -20,6 +20,11 @@ const main = function () {
         [-1],
         [-2, -1, -3, -4, -1, -2, -1, -5, -4],
     );
+    test(
+        "array with all negative values should largest value as maximum subarray sum",
+        [1, 2, 3, -6, 10],
+        [-1, 1, 2, 3, -6, 10],
+    );
     test("empty should give 0 as a maximum subarray sum", [], []);
 };
 
